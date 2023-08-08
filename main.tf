@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = join("-", [lower("${var.application_name}"), "pipelineartifact"])
+  bucket = join("-", ["${var.jnv_project}", "${var.jnv_region}", lower("${var.application_name}"), "pipeline-artifact", "${var.jnv_environment}"])
 }
 
 resource "aws_s3_bucket_ownership_controls" "bucketownership" {
@@ -19,7 +19,7 @@ resource "aws_s3_bucket_public_access_block" "publcaccess_block" {
 }
 
 resource "aws_iam_role" "codepipeline_role" {
-  name = join("-", ["codepipeline", "${var.application_name}", "codepipeline_role"])
+  name = join("-", ["${var.jnv_project}", "${var.jnv_region}", "${var.application_name}", "pipeline-service-role", "${var.jnv_environment}"])
 
   assume_role_policy = <<EOF
 {
@@ -85,7 +85,7 @@ resource "aws_iam_role_policy" "codepipeline_policy" {
   })
 }
 
-resource "aws_codepipeline" "terragrunt_pipeline" {
+resource "aws_codepipeline" "jnv-2tier-pipeline" {
   name     = join("-", ["${var.jnv_project}", "${var.jnv_region}", "${var.application_name}", "pipeline", "${var.jnv_environment}"])
   role_arn = aws_iam_role.codepipeline_role.arn
   artifact_store {
@@ -142,7 +142,7 @@ resource "aws_codepipeline" "terragrunt_pipeline" {
 }
 
 resource "aws_iam_role" "codebuild" {
-  name = join("-", [var.application_name, "codebuild_role"])
+  name = join("-", ["${var.jnv_project}", "${var.jnv_region}", "${var.application_name}", "cb-service-role", "${var.jnv_environment}"])
 
   assume_role_policy = <<EOF
 {
@@ -190,7 +190,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
 resource "aws_codebuild_project" "codebuild_project" {
   badge_enabled  = false
   build_timeout  = 60
-  name           = join("", ["${var.application_name}", "Build"])
+  name           = join("-", ["${var.jnv_project}", "${var.jnv_region}", "${var.application_name}", "cb", "${var.jnv_environment}"])
   queued_timeout = 480
   service_role   = aws_iam_role.codebuild.arn
   artifacts {
