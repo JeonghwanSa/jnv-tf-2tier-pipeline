@@ -1,3 +1,8 @@
+data "aws_caller_identity" "current" {}
+locals {
+  account_id = data.aws_caller_identity.current.account_id
+}
+
 resource "aws_s3_bucket" "codepipeline_bucket" {
   bucket = join("-", ["${var.jnv_project}", "${var.jnv_region}", lower("${var.application_name}"), "pipeline-artifact", "${var.jnv_environment}"])
 }
@@ -183,6 +188,32 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         ],
         Resource = "*"
       },
+      {
+        Effect = "Allow",
+        Resource = [
+          "${aws_s3_bucket.codepipeline_bucket.arn}",
+          "${aws_s3_bucket.codepipeline_bucket.arn}/*"
+        ],
+        Action = [
+          "s3:PutObject",
+          "s3:GetObject",
+          "s3:GetObjectVersion",
+          "s3:GetBucketAcl",
+          "s3:GetBucketLocation"
+        ]
+      },
+      {
+        Effect = "Allow",
+        Resource = [
+          "arn:aws:logs:ap-northeast-2:${local.account_id}:log-group:/aws/codebuild/*",
+          "arn:aws:logs:ap-northeast-2:${local.account_id}:log-group:/aws/codebuild/*:*",
+        ],
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+      }
     ]
   })
 }
