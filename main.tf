@@ -185,6 +185,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
           "ec2:*",
           "lambda:*",
           "apigateway:*",
+          "iam:PassRole",
         ],
         Resource = "*"
       },
