@@ -12,6 +12,9 @@ variable "pipeline_branch" {}
 variable "build_compute_size" {
   default = "BUILD_GENERAL1_LARGE"
 }
+variable "build_image" {
+  default = "aws/codebuild/amazonlinux2-x86_64-standard:5.0"
+}
 variable "bulidspec_name" {
   default = "buildspec.yaml"
 }

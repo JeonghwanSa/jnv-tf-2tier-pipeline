@@ -234,10 +234,15 @@ resource "aws_codebuild_project" "codebuild_project" {
 
   environment {
     compute_type                = var.build_compute_size
-    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:4.0"
+    image                       = var.build_image
     image_pull_credentials_type = "CODEBUILD"
     privileged_mode             = true
     type                        = "LINUX_CONTAINER"
+
+    environment_variable {
+      name  = "CODEPIPELINE_BUCKET"
+      value = aws_s3_bucket.codepipeline_bucket.id
+    }
   }
 
   logs_config {
