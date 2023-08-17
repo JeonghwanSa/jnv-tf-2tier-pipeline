@@ -182,6 +182,7 @@ resource "aws_iam_role_policy" "codebuild_policy" {
         Action = [
           "cloudformation:*",
           "ecs:*",
+          "ecr:*",
           "ec2:*",
           "lambda:*",
           "apigateway:*",
