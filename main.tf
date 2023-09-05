@@ -274,4 +274,10 @@ resource "aws_codebuild_project" "codebuild_project" {
       vpc_id             = var.codebuild_vpc_id
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      environment[0].environment_variable
+    ]
+  }
 }
