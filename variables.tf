@@ -25,6 +25,15 @@ variable "build_privileged_mode" {
 variable "bulidspec_name" {
   default = "buildspec.yaml"
 }
+variable "codebuild_vpc_id" {
+  default = ""
+}
+variable "codebuild_vpc_subnets" {
+  default = [""]
+}
+variable "codebuild_vpc_sg" {
+  default = [""]
+}
 variable "need_approval" {
   type    = bool
   default = false
