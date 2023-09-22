@@ -34,6 +34,9 @@ variable "codebuild_vpc_subnets" {
 variable "codebuild_vpc_sg" {
   default = [""]
 }
+variable "codebuild_environment_variables" {
+  default = []
+}
 variable "need_approval" {
   type    = bool
   default = false

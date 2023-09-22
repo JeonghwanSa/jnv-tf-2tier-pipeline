@@ -9,6 +9,13 @@ module "jnv_tf_2tier_pipeline" {
   source                   = "git::https://github.com/JeonghwanSa/jnv-tf-2tier-pipeline.git"
   application_name         = "jobis-example"
   pipeline_branch          = "main"
+  codebuild_environment_variables = [
+    {
+      "type" : "PLAINTEXT",
+      "name" : "example",
+      "value" : "example"
+    }
+  ]
   github_connection_arn    = "arn:aws:codestar-connections:ap-northeast-2:111122223333:connection/1234abcd-5678-efgh-9000-ijkl0000mnop"
   github_fullrepository_id = "jobisnvillains/szs-jobis-example-tf"
 }
@@ -53,6 +60,7 @@ No modules.
 | <a name="input_build_image_credential_type"></a> [build\_image\_credential\_type](#input\_build\_image\_credential\_type) | n/a | `string` | `"CODEBUILD"` | no |
 | <a name="input_build_privileged_mode"></a> [build\_privileged\_mode](#input\_build\_privileged\_mode) | n/a | `bool` | `false` | no |
 | <a name="input_bulidspec_name"></a> [bulidspec\_name](#input\_bulidspec\_name) | n/a | `string` | `"buildspec.yaml"` | no |
+| <a name="input_codebuild_environment_variables"></a> [codebuild\_environment\_variables](#input\_codebuild\_environment\_variables) | n/a | `any` | n/a | yes |
 | <a name="input_codebuild_vpc_id"></a> [codebuild\_vpc\_id](#input\_codebuild\_vpc\_id) | n/a | `string` | `""` | no |
 | <a name="input_codebuild_vpc_sg"></a> [codebuild\_vpc\_sg](#input\_codebuild\_vpc\_sg) | n/a | `list` | <pre>[<br>  ""<br>]</pre> | no |
 | <a name="input_codebuild_vpc_subnets"></a> [codebuild\_vpc\_subnets](#input\_codebuild\_vpc\_subnets) | n/a | `list` | <pre>[<br>  ""<br>]</pre> | no |
