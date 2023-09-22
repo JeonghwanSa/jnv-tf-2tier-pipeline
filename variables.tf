@@ -22,7 +22,7 @@ variable "build_privileged_mode" {
   type    = bool
   default = false
 }
-variable "bulidspec_name" {
+variable "buildspec_name" {
   default = "buildspec.yaml"
 }
 variable "codebuild_vpc_id" {

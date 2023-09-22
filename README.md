@@ -59,7 +59,7 @@ No modules.
 | <a name="input_build_image"></a> [build\_image](#input\_build\_image) | n/a | `string` | `"aws/codebuild/amazonlinux2-x86_64-standard:5.0"` | no |
 | <a name="input_build_image_credential_type"></a> [build\_image\_credential\_type](#input\_build\_image\_credential\_type) | n/a | `string` | `"CODEBUILD"` | no |
 | <a name="input_build_privileged_mode"></a> [build\_privileged\_mode](#input\_build\_privileged\_mode) | n/a | `bool` | `false` | no |
-| <a name="input_bulidspec_name"></a> [bulidspec\_name](#input\_bulidspec\_name) | n/a | `string` | `"buildspec.yaml"` | no |
+| <a name="input_buildspec_name"></a> [bulidspec\_name](#input\_bulidspec\_name) | n/a | `string` | `"buildspec.yaml"` | no |
 | <a name="input_codebuild_environment_variables"></a> [codebuild\_environment\_variables](#input\_codebuild\_environment\_variables) | n/a | `any` | n/a | yes |
 | <a name="input_codebuild_vpc_id"></a> [codebuild\_vpc\_id](#input\_codebuild\_vpc\_id) | n/a | `string` | `""` | no |
 | <a name="input_codebuild_vpc_sg"></a> [codebuild\_vpc\_sg](#input\_codebuild\_vpc\_sg) | n/a | `list` | <pre>[<br>  ""<br>]</pre> | no |
